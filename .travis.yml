@@ -1,0 +1,21 @@
+#  .travis.yml file to be placed in the root of your repository
+
+language: node_js
+
+node_js:
+  - 14.15.1
+
+cache: yarn  # This caches $HOME/.cache/yarn.
+
+script:
+  - yarn build
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN 
+  local_dir: build
+  on:
+    branch: master
+
+# If yarn.lock exists, the default test command will be "yarn test" instead of "npm test"
