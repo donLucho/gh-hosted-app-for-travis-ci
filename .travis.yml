@@ -35,9 +35,6 @@ install:
 script:
   - yarn build
 
-before_cache:
-  - echo "HEY, MAN! A build cache is about to be stored."
-
 after_success:
   - echo "HEY, MAN! The script stage has been a resounding SUCCESS!!!"
 
