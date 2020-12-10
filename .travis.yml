@@ -13,11 +13,11 @@ cache:
 
 deploy:
   provider: pages
-  strategy: git  # missing strategy, using the default "git"
-  # skip-cleanup: true # deprecated key: "skip_cleanup" (not supported in dpl v2, use cleanup)
-  cleanup: false
-  # github-token: $GITHUB_TOKEN # the key github-token is an alias for token, using token
-  token: $GITHUB_TOKEN  # both github-token and token given. github-token overwrites token
+  # strategy: git  # missing strategy, using the default "git"
+  skip-cleanup: true # deprecated key: "skip_cleanup" (not supported in dpl v2, use cleanup)
+  # cleanup: false
+  github-token: $GITHUB_TOKEN # the key github-token is an alias for token, using token
+  # token: $GITHUB_TOKEN  # both github-token and token given. github-token overwrites token
   local_dir: build
   on:
     branch: master
@@ -35,17 +35,4 @@ install:
 script:
   - yarn build
 
-after_success:
-  - echo "HEY, MAN! The script stage has been a resounding SUCCESS!!!"
-
-after_failure:
-  - echo "HEY, MAN! The script stage has been a hideous FAILURE!!!"
-
-before_deploy:
-  - echo "HEY, MAN! The contents of the build folder are about to be deployed!!!"
-
-after_deploy:
-  - echo "HEY, MAN! The contents of the build folder have been deployed!!!"
-
-after_script:
-  - echo "HEY, MAN! YOU'RE DONE! It's time for a break... or a KIT-KAT bar!!!"
+# If yarn.lock exists, the default test command will be "yarn test" instead of "npm test"
