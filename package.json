@@ -1,5 +1,6 @@
 {
   "name": "gh-hosted-app-for-travis-ci",
+  "description": "A starting point for a Travis-CI workflow for use with GitHub.",
   "version": "0.1.0",
   "private": true,
   "homepage": "https://donlucho.github.io/gh-hosted-app-for-travis-ci",

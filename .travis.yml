@@ -35,4 +35,20 @@ install:
 script:
   - yarn build
 
-# If yarn.lock exists, the default test command will be "yarn test" instead of "npm test"
+before_cache:
+  - echo "HEY, MAN! A build cache is about to be stored."
+
+after_success:
+  - echo "HEY, MAN! The script stage has been a resounding SUCCESS!!!"
+
+after_failure:
+  - echo "HEY, MAN! The script stage has been a hideous FAILURE!!!"
+
+before_deploy:
+  - echo "HEY, MAN! The contents of the build folder are about to be deployed!!!"
+
+after_deploy:
+  - echo "HEY, MAN! The contents of the build folder have been deployed!!!"
+
+after_script:
+  - echo "HEY, MAN! YOU'RE DONE! It's time for a break... or a KIT-KAT bar!!!"
