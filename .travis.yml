@@ -1,21 +1,54 @@
-#  .travis.yml file to be placed in the root of your repository
-
 language: node_js
-
 node_js:
   - 14.15.1
 
-cache: yarn  # This caches $HOME/.cache/yarn.
+os: linux
+dist: xenial
+arch: arm64
 
-script:
-  - yarn build
+cache:
+  apt: true
+  npm: false
+  yarn: true
 
 deploy:
   provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN 
+  strategy: git  # missing strategy, using the default "git"
+  # skip-cleanup: true # deprecated key: "skip_cleanup" (not supported in dpl v2, use cleanup)
+  cleanup: false
+  # github-token: $GITHUB_TOKEN # the key github-token is an alias for token, using token
+  token: $GITHUB_TOKEN  # both github-token and token given. github-token overwrites token
   local_dir: build
   on:
     branch: master
 
-# If yarn.lock exists, the default test command will be "yarn test" instead of "npm test"
+before_install: 
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.22.5
+  - export PATH="$HOME/.yarn/bin:$PATH"
+
+install:
+  - yarn install
+
+# before_script:
+#   - yarn install
+
+script:
+  - yarn build
+
+before_cache:
+  - echo "HEY, MAN! A build cache is about to be stored."
+
+after_success:
+  - echo "HEY, MAN! The script stage has been a resounding SUCCESS!!!"
+
+after_failure:
+  - echo "HEY, MAN! The script stage has been a hideous FAILURE!!!"
+
+before_deploy:
+  - echo "HEY, MAN! The contents of the build folder are about to be deployed!!!"
+
+after_deploy:
+  - echo "HEY, MAN! The contents of the build folder have been deployed!!!"
+
+after_script:
+  - echo "HEY, MAN! YOU'RE DONE! It's time for a break... or a KIT-KAT bar!!!"
