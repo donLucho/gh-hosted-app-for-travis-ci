@@ -2,6 +2,10 @@ pipeline {
   
   agent any
 
+  tools {
+    gradle 'Gradle'
+  }
+
   stages {
     
     stage("run frontend with npm") {
@@ -21,8 +25,8 @@ pipeline {
       steps {
         echo 'executing gradle...'
         withGradle() {
-          sh 'gradle wrapper'
-          sh './gradlew -v'
+          // sh 'gradle wrapper'
+          sh './gradlew --version'
         }
       }
     }
