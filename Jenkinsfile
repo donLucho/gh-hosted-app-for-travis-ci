@@ -24,10 +24,12 @@ pipeline {
     stage("run backend with gradle") {
       steps {
         echo 'executing gradle...'
-        withGradle() {
-          // sh 'gradle wrapper'
+        
+        // withGradle() {
+          sh 'gradle wrapper'
           sh './gradlew --version'
-        }
+        // }
+
       }
     }
     
