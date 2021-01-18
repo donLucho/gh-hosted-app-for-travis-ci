@@ -2,7 +2,7 @@ pipeline {
   
   agent any
 
-  // with the tools field, only maven, graven, and jdk are presently supported
+  // with the tools field, only maven, gradle, and jdk are presently supported
   // the "tools" field has to be included for the "./gradlew" statement to be included in the path
 
   tools {
@@ -28,10 +28,10 @@ pipeline {
       steps {
         echo 'executing gradle...'
         
-        // withGradle() {
-          sh 'gradle wrapper'
+        withGradle() {
+          // sh 'gradle wrapper'
           sh './gradlew --version'
-        // }
+        }
 
       }
     }
