@@ -2,6 +2,9 @@ pipeline {
   
   agent any
 
+  // with the tools field, only maven, graven, and jdk are presently supported
+  // the "tools" field has to be included for the "./gradlew" statement to be included in the path
+
   tools {
     gradle 'Gradle'
   }
