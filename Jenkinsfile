@@ -37,8 +37,10 @@ pipeline {
         // sh "yarn run test"
 
         nodejs("Node-14.15.4") {
+          sh "node --version"
+          sh "yarn --version"
           // sh "npm test"
-          sh "yarn run test"
+          // sh "yarn run test"
         }
 
       }
