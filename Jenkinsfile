@@ -22,7 +22,7 @@ pipeline {
           sh "node --version"
           sh "yarn --version"
           // sh "npm install"
-          sh "yarn"
+          // sh "yarn"
         }
 
       }
