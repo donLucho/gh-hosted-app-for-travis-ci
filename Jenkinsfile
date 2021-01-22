@@ -1,11 +1,64 @@
 pipeline {
-  
-  // agent {
-  //   docker {
-  //     image "node:14-alpine"
-  //     args "-p 3000:3000"
-  //   }
-  // }
+
+  agent any
+
+  environment {
+    GIMME_DERRP = true
+    // GIMME_DERRP = false
+  }
+
+  stages {
+
+    stage("error"){
+      when {
+        expression { GIMME_DERRP == true }
+      }
+      steps {
+        echo "Aw, man! You broke it!"
+        error "Fail blog... DOT ORG"
+      }
+    }
+    
+    stage("build") {
+      when {
+        expression { GIMME_DERRP == false }
+      }
+      steps {
+        echo "Building the application..."
+        
+        nodejs("Node-14.15.4") {
+          sh "node --version"
+          sh "yarn --version"
+          // sh "npm install"
+          // sh "yarn"
+        }
+
+      }
+    }
+
+    stage("test") {
+      when {
+        expression { GIMME_DERRP == false }
+      }
+      steps {
+        echo "Testing the application..."
+        
+        nodejs("Node-14.15.4") {
+          sh "node --version"
+          sh "yarn --version"
+          // sh "npm test"
+          // sh "yarn run test"
+        }
+
+      }
+      
+    }
+    
+  }
+
+}
+
+/* pipeline {
 
   agent any
 
@@ -15,9 +68,6 @@ pipeline {
       steps {
         echo "Building the application..."
         
-        // sh "npm install"
-        // sh "yarn"
-
         nodejs("Node-14.15.4") {
           sh "node --version"
           sh "yarn --version"
@@ -33,9 +83,6 @@ pipeline {
       steps {
         echo "Testing the application..."
         
-        // sh "npm test"
-        // sh "yarn run test"
-
         nodejs("Node-14.15.4") {
           sh "node --version"
           sh "yarn --version"
@@ -49,7 +96,7 @@ pipeline {
     
   }
 
-}
+} */
 
 /* pipeline {
   
