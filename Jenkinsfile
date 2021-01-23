@@ -78,7 +78,7 @@ pipeline {
       
       echo "But one or more of your stages have failed..."
       
-      emailext attachLog: true, body: "${DEFAULT_CONTENT}", compressLog: true, subject: "${DEFAULT_SUBJECT}", to: "${DEFAULT_RECIPIENTS}"
+      emailext attachLog: true, body: 'One or more of your stages have failed', compressLog: true, subject: "${DEFAULT_SUBJECT}", to: "${DEFAULT_RECIPIENTS}"
       
     }
   }
