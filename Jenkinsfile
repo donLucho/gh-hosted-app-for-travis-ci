@@ -4,11 +4,8 @@ pipeline {
 
   environment {
     
-    GIMME_DERRP = '1'
-    //GIMME_DERRP = '0'
-
-    // GIMME_DERRP = true
-    // GIMME_DERRP = false
+    // GIMME_DERRP = '1'
+    GIMME_DERRP = '0'
 
   }
 
@@ -16,7 +13,6 @@ pipeline {
 
     stage("error"){
       when {
-        // expression { GIMME_DERRP == true }
         expression { GIMME_DERRP == '1' }
       }
       steps {
@@ -27,7 +23,6 @@ pipeline {
     
     stage("build") {
       when {
-        // expression { GIMME_DERRP == false }
         expression { GIMME_DERRP == '0' }
       }
       steps {
@@ -45,7 +40,6 @@ pipeline {
 
     stage("test") {
       when {
-        // expression { GIMME_DERRP == false }
         expression { GIMME_DERRP == '0' }
       }
       steps {
@@ -78,133 +72,9 @@ pipeline {
       
       echo "But one or more of your stages have failed..."
       
-      emailext attachLog: true, body: 'One or more of your stages have failed', compressLog: true, subject: 'Fail Test', to: "${DEFAULT_RECIPIENTS}"
+      emailext attachLog: true, body: '$DEFAULT_CONTENT', compressLog: true, subject: '$DEFAULT_SUBJECT', to: '$DEFAULT_RECIPIENTS'
       
     }
   }
 
 }
-
-/* pipeline {
-
-  agent any
-
-  environment {
-    GIMME_DERRP = true
-    // GIMME_DERRP = false
-  }
-
-  stages {
-
-    stage("error"){
-      when {
-        expression { GIMME_DERRP == true }
-      }
-      steps {
-        echo "Aw, man! You broke it!"
-        error "The test has failed. TRY AGAIN!"
-      }
-    }
-    
-    stage("build") {
-      when {
-        expression { GIMME_DERRP == false }
-      }
-      steps {
-        echo "Building the application..."
-        
-        nodejs("Node-14.15.4") {
-          sh "node --version"
-          sh "yarn --version"
-          // sh "npm install"
-          // sh "yarn"
-        }
-
-      }
-    }
-
-    stage("test") {
-      when {
-        expression { GIMME_DERRP == false }
-      }
-      steps {
-        echo "Testing the application..."
-        
-        nodejs("Node-14.15.4") {
-          sh "node --version"
-          sh "yarn --version"
-          // sh "npm test"
-          // sh "yarn run test"
-        }
-
-      }
-      
-    }
-    
-  }
-
-} */
-
-/* pipeline {
-
-  agent any
-
-  stages {
-    
-    stage("build") {
-      steps {
-        echo "Building the application..."
-        
-        nodejs("Node-14.15.4") {
-          sh "node --version"
-          sh "yarn --version"
-          // sh "npm install"
-          // sh "yarn"
-        }
-
-      }
-    }
-
-    stage("test") {
-      
-      steps {
-        echo "Testing the application..."
-        
-        nodejs("Node-14.15.4") {
-          sh "node --version"
-          sh "yarn --version"
-          // sh "npm test"
-          // sh "yarn run test"
-        }
-
-      }
-      
-    }
-    
-  }
-
-} */
-
-/* pipeline {
-  
-  agent any
-
-  stages {
-    
-    stage("build") {
-      steps {
-        echo "Building the application..."
-      }
-    }
-
-    stage("test") {
-      
-      steps {
-        echo "Testing the application..."
-      }
-      
-    }
-    
-  }
-
-} */
