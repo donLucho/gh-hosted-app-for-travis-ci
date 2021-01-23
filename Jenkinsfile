@@ -61,19 +61,13 @@ pipeline {
   post {
     always {
       echo "All of your stages have completed..."
-
-      // emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
-
+      emailext attachLog: true, body: '$DEFAULT_CONTENT', compressLog: true, subject: '$DEFAULT_SUBJECT', to: '$DEFAULT_RECIPIENTS'
     }
     success {  
       echo "Plus, all of your stages have succeeded..."
     }
     failure {
-      
       echo "But one or more of your stages have failed..."
-      
-      emailext attachLog: true, body: '$DEFAULT_CONTENT', compressLog: true, subject: '$DEFAULT_SUBJECT', to: '$DEFAULT_RECIPIENTS'
-      
     }
   }
 
