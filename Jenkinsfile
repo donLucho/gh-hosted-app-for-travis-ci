@@ -67,6 +67,9 @@ pipeline {
   post {
     always {
       echo "All of your stages have completed..."
+
+      // emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+
     }
     success {  
       echo "Plus, all of your stages have succeeded..."
@@ -74,9 +77,8 @@ pipeline {
     failure {
       
       echo "But one or more of your stages have failed..."
-      // emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
-
-      emailext body: 'One or more of your stages have failed', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Fail Test'
+      
+      emailext body: 'One or more of your stages have failed', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Fail Test', to: 'donluchodev@gmail.com'
       
     }
   }
