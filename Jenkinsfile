@@ -78,7 +78,7 @@ pipeline {
       
       echo "But one or more of your stages have failed..."
       
-      emailext body: 'One or more of your stages have failed', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Fail Test', to: 'donluchodev@gmail.com'
+      emailext attachLog: true, body: "${DEFAULT_CONTENT}", compressLog: true, subject: "${DEFAULT_SUBJECT}", to: "${DEFAULT_RECIPIENTS}"
       
     }
   }
