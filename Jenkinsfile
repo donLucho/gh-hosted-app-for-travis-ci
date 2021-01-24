@@ -4,8 +4,8 @@ pipeline {
 
   environment {
     
-    // GIMME_DERRP = '1'
-    GIMME_DERRP = '0'
+    GIMME_DERRP = '1'
+    // GIMME_DERRP = '0'
 
   }
 
@@ -59,16 +59,18 @@ pipeline {
   }
 
   post {
+
     always {
       echo "All of your stages have completed..."
       emailext attachLog: true, body: '$DEFAULT_CONTENT', compressLog: true, subject: '$DEFAULT_SUBJECT', to: '$DEFAULT_RECIPIENTS'
     }
-    success {  
+    success {
       echo "Plus, all of your stages have succeeded..."
+      // emailext body: '$DEFAULT_CONTENT', subject: 'Success test -- all of your stages have succeeded', to: '$DEFAULT_RECIPIENTS'
     }
     failure {
       echo "But one or more of your stages have failed..."
+      // emailext body: '$DEFAULT_CONTENT', subject: 'Fail test -- one or more of your stages have failed', to: '$DEFAULT_RECIPIENTS'
     }
-  }
 
 }
