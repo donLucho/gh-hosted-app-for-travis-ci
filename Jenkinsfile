@@ -4,8 +4,8 @@ pipeline {
 
   environment {
     
-    GIMME_DERRP = '1'
-    // GIMME_DERRP = '0'
+    // GIMME_DERRP = '1'
+    GIMME_DERRP = '0'
 
   }
 
